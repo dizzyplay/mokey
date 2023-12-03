@@ -16,11 +16,11 @@ type Expression interface {
 	expressionNode()
 }
 
-type Problem struct {
+type Program struct {
 	Statements []Statement
 }
 
-func (p *Problem) TokenLiteral() string {
+func (p *Program) TokenLiteral() string {
 	if len(p.Statements) > 0 {
 		return p.Statements[0].TokenLiteral()
 	} else {
@@ -44,3 +44,11 @@ type Identifier struct {
 
 func (i *Identifier) expressionNode()      {}
 func (i *Identifier) TokenLiteral() string { return i.Token.Literal }
+
+type ReturnStatement struct {
+	Token  token.Token
+	Return Expression
+}
+
+func (rs *ReturnStatement) statementNode()       {}
+func (rs *ReturnStatement) TokenLiteral() string { return rs.Token.Literal }
