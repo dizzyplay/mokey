@@ -16,6 +16,8 @@ func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {
 	case *ast.Program:
 		return evalProgram(node, env)
+	case *ast.FunctionLiteral:
+		return &object.Function{Parameters: node.Paramaters, Body: node.Body}
 	case *ast.LetStatement:
 		val := Eval(node.Value, env)
 		if isError(val) {
