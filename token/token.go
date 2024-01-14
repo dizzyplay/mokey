@@ -18,6 +18,8 @@ func LookupIdent(ident string) TokenType {
 }
 
 const (
+	STRING = "STRING"
+
 	ILLEGAL = "ILLEGAL"
 	EOF     = "EOF"
 
