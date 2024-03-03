@@ -57,6 +57,8 @@ const (
 	IF       = "IF"
 	ELSE     = "ELSE"
 	RETURN   = "RETURN"
+
+	COLON = ":"
 )
 
 type TokenType string
