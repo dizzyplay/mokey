@@ -45,8 +45,9 @@ var builtins = map[string]*object.Builtin{
 				return newError("argument to first must be ARRAY, got %s", args[0].Type())
 			}
 			arr := args[0].(*object.Array)
-			if len(arr.Elements) > 0 {
-				return arr.Elements[len(arr.Elements)-1]
+			length := len(arr.Elements)
+			if length > 0 {
+				return arr.Elements[length-1]
 			}
 			return NULL
 		},
