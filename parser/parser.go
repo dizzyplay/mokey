@@ -112,7 +112,10 @@ func (p *Parser) parseHashLiteral() ast.Expression {
 			return nil
 		}
 	}
-	p.nextToken()
+
+	if !p.expectPeek(token.RBRACE) {
+		return nil
+	}
 
 	return hash
 }
