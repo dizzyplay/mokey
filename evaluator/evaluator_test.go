@@ -7,6 +7,64 @@ import (
 	"testing"
 )
 
+func TestArrayIndexExpressions(t *testing.T) {
+	tests := []struct {
+		input    string
+		expected interface{}
+	}{
+		{
+			"[1,2,3][0]",
+			1,
+		},
+		{
+			"[1,2,3][1]",
+			2,
+		},
+		{
+			"[1,2,3][2]",
+			3,
+		},
+		{
+			"let i = 0; [1][i];",
+			3,
+		},
+		{
+			"[1,2,3][1 + 1]",
+			3,
+		},
+		{
+			"let myArray = [1,2,3]; myArray[2];",
+			3,
+		},
+		{
+			"let a = [1,2,3]; a[0] +a[1]+a[2];",
+			6,
+		},
+		{
+			"let a = [1,2,3]; let i=a[0];a[i];",
+			2,
+		},
+		{
+			"[1,2,3][3]",
+			nil,
+		},
+		{
+			"[1,2,3][-1]",
+			nil,
+		},
+	}
+
+	for _, tt := range tests {
+		evalutated := testEval(tt.input)
+		integer, ok := tt.expected.(int)
+		if ok {
+			testIntegerObject(t, evalutated, int64(integer))
+		} else {
+			testNullObject(t, evalutated)
+		}
+	}
+}
+
 func TestArrayLiteral(t *testing.T) {
 	input := "[1, 2 * 2, 3 + 3]"
 	evalutated := testEval(input)
