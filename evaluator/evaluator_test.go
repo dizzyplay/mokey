@@ -26,7 +26,7 @@ func TestArrayIndexExpressions(t *testing.T) {
 		},
 		{
 			"let i = 0; [1][i];",
-			3,
+			1,
 		},
 		{
 			"[1,2,3][1 + 1]",
@@ -92,6 +92,7 @@ func TestBuiltinFunctions(t *testing.T) {
 		{`len("hello world")`, 11},
 		{`len(1)`, "argument to len not supported, got INTEGER"},
 		{`len("one", "two")`, "wrong number of arguments. got=2, want=1"},
+		{`first([1,2,3,4])`, 1},
 	}
 
 	for _, tt := range tests {
