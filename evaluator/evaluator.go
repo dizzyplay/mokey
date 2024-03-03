@@ -14,6 +14,12 @@ var (
 
 func Eval(node ast.Node, env *object.Environment) object.Object {
 	switch node := node.(type) {
+	case *ast.ArrayLiteral:
+		elements := evalExpressions(node.Elements, env)
+		if len(elements) == 1 && isError(elements[0]) {
+			return elements[0]
+		}
+		return &object.Array{Elements: elements}
 	case *ast.Program:
 		return evalProgram(node, env)
 	case *ast.StringLiteral:
